@@ -1,3 +1,5 @@
+
+
 # Merge the training and the test sets to create one data set.
 
 #Set working directory
@@ -75,7 +77,7 @@ head(Data)
 logicVector = (grepl("activity..",colNames) | grepl("subject..",colNames) | grepl("-mean..",colNames) & !grepl("-meanFreq..",colNames) & !grepl("mean..-",colNames) | grepl("-std..",colNames) & !grepl("-std()..-",colNames));
 
 # Subset finalData table based on the logicalVector to keep only desired columns
-subData = Data[logicalVector==TRUE];
+subData = Data[logicVector==TRUE];
 #display data
 head(subData)
 
