@@ -29,17 +29,29 @@ Section 1. Merge the training and the test sets to create one data set.
 ## R Script
 The script run_analysis.R performs the 5 steps in the assignment
 
+### 1 Merge Data
 
+First the training and test data files are loaded into R using read.table and merged using the cbind() and rbind() commands. Resulting testData and trainingData are then merged together once again using cbind(). All dataframes are verified using head()
 
-First, all the similar data is merged using the rbind() function. By similar, we address those files having the same number of columns and referring to the same entities.
-Then, only those columns with the mean and standard deviation measures are taken from the whole dataset. After extracting these columns, they are given the correct names, taken from features.txt.
-As activity data is addressed with values 1:6, we take the activity names and IDs from activity_labels.txt and they are substituted in the dataset.
-On the whole dataset, those columns with vague column names are corrected.
-Finally, we generate a new dataset with all the average measures for each subject and activity type (30 subjects * 6 activities = 180 rows). The output file is called averages_data.txt, and uploaded to this repository.
-Variables
-x_train, y_train, x_test, y_test, subject_train and subject_test contain the data from the downloaded files.
-x_data, y_data and subject_data merge the previous datasets to further analysis.
-features contains the correct names for the x_data dataset, which are applied to the column names stored in mean_and_std_features, a numeric vector used to extract the desired data.
-A similar approach is taken with activity names through the activities variable.
-all_data merges x_data, y_data and subject_data in a big dataset.
-Finally, averages_data contains the relevant averages which will be later stored in a .txt file. ddply() from the plyr package is used to apply colMeans() and ease the development.
+### 2 Extract measurement for mean and standard deviation
+
+Columns with the mean and standard deviation measures are extracted from the dataset using the logical vector "logicVector". The resulting subset "subData" is then inspected using the head() command
+
+### 3 Uses descriptive activity names to name the activities in the data set
+The resulting frame subData is merged with the acticit descriptions
+
+### 4 Clean up column names
+For the subData frame, columns with unclear column names are corrected using the gsub() command
+
+### 5 Create Tidydata
+A new dataset tidyData is created, containing all the average measures for each subject and acticity type, containing 180 observations. The output file is created
+
+## Variables
+xTrain, yTrain, xTest, yTest, subjectTrain and subjectTest contain the raw downloaded data
+trainingData and testData, contained the merged datsets 
+Data contains the completed dataset
+logicVector contains the argument to extract subData
+acticityType contains the activity types
+subData contains the subset created in step 2
+tidyData contains the final dataset featuring the relevant averages
+
